@@ -1,5 +1,5 @@
 <template>
-    <h1>Individual scenario</h1>
+    <h1>Questions</h1>
 </template>
 <script>
 

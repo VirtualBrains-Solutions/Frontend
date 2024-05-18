@@ -1,11 +1,15 @@
 <template>
-    <h1>Scenarios</h1>
+    <ScenariosComponent :scenarios = "this.scenarios" />
 </template>
 <script>
 
-import RegisterApplicationService from "../core/RegisterApplicationService.js";
+import RegisterApplicationService from "../core/RegisterApplicationService.js"
+import ScenariosComponent from "../components/ScenariosComponents/ScenariosComponent.vue"
 
 export default {
+    components:{
+        ScenariosComponent
+    },
     data(){
         return {
             scenarios: []
@@ -15,8 +19,7 @@ export default {
     },
     async created() {
         const objService = new RegisterApplicationService();
-        const response = await objService.getScenarios()
-        console.log(response)
+        this.scenarios= await objService.getScenarios()
     }
 }
 

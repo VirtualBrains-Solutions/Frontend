@@ -1,13 +1,19 @@
 <template>
-    <h1>Individual scenario</h1>
+    <div class="container-indivisualscenario">
+        <InfoScenarioComponent :scenario-info="scenarioInfo"/>
+        <CommentsScenarioComponent :comments="comments"/>
+    </div>
 </template>
+
 <script>
-{}
 import RegisterApplicationService from "../core/RegisterApplicationService.js"
+import InfoScenarioComponent from "../components/IndividualScenario/InfoScenarioComponent.vue"
+import CommentsScenarioComponent  from "../components/IndividualScenario/CommentsScenarioComponent.vue";
 
 export default {
     components:{
-
+        InfoScenarioComponent,
+        CommentsScenarioComponent
     },
     data() {
         return {
@@ -28,10 +34,18 @@ export default {
 
         // Get the comments
         this.comments = await objService.getCommentsFromScenario(id)
-
     }
 }
 </script>
 <style scoped>
+.container-indivisualscenario{
+    display: flex;
+}
+@media(max-width: 900px){
+    .container-indivisualscenario{
+        display: flex;
+        flex-direction: column;
+    }
+}
 
 </style>

@@ -37,6 +37,34 @@ class RegisterApplicationService{
             return error
         }
     }
+    async createComment(data){
+        try {
+            await http.post("/comments/", data)
+        }
+        catch(error){
+            console.log(error)
+            return error
+        }
+
+    }
+    async changeLikesScenario(id, data){
+        try {
+            await http.put(`/scenarios/likes/${id}`, data)
+        }
+        catch(error){
+            console.log(error)
+            return error
+        }
+    }
+    async changeDislikesScenario(id, data){
+        try {
+            await http.put(`/scenarios/dislikes/${id}`, data)
+        }
+        catch(error){
+            console.log(error)
+            return error
+        }
+    }
 }
 
 export default RegisterApplicationService;

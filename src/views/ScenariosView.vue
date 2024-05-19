@@ -18,8 +18,13 @@ export default {
     methods: {
     },
     async created() {
-        const objService = new RegisterApplicationService();
-        this.scenarios= await objService.getScenarios()
+        try{
+            const objService = new RegisterApplicationService();
+            this.scenarios= await objService.getScenarios()
+        }
+        catch(error){
+            console.log(error)
+        }
     }
 }
 

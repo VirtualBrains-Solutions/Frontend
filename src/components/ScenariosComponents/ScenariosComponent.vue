@@ -1,5 +1,5 @@
 <template>
-    <h1>Listado de escenarios</h1>
+    <h1 class = "mt-2">Listado de escenarios</h1>
     <p>Aquí podrás ver todos los escenarios disponibles en nuestra aplicación de realidad virtual. Podrás dejar tus comentarios, calificacarlos y ver las opiniones de
     los demás usuarios.</p>
     <section class = "container-scenarios">

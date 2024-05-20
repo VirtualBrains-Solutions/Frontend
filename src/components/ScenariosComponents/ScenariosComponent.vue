@@ -1,8 +1,8 @@
 <template>
     <h1 class = "mt-2">Listado de escenarios</h1>
-    <p>Aquí podrás ver todos los escenarios disponibles en nuestra aplicación de realidad virtual. Podrás dejar tus comentarios, calificacarlos y ver las opiniones de
+    <p>Aquí podrás ver todos los escenarios disponibles en nuestra aplicación de realidad virtual. Podrás dejar tus comentarios, calificarlos y ver las opiniones de
     los demás usuarios.</p>
-    <section class = "container-scenarios">
+    <section class = "container-scenarios mt-4">
         <article v-for = "item in scenarios" :key = "item" class = "scenario-article">
             <ScenarioCardComponent :scenario = "item" />
         </article>

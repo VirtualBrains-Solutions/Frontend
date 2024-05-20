@@ -14,11 +14,21 @@
                 <i class="fa-solid fa-thumbs-down reaction-icon" @click = "changeDislikes"></i>
             </div>
         </div>
+        <button class = "btn btn-success mt-2" @click = "selectFavoriteScenario">Agregar a favoritos</button>
     </div>
 </template>
 <script>
 import RegisterApplicationService from "../../core/RegisterApplicationService.js";
+import Swal from "sweetalert2";
 export default {
+    data(){
+        return {
+            infoFavoriteScenario:{
+                "usuario_id": 1,
+                "escenario_id": ""
+            }
+        }
+    },
     props: {
         scenarioInfo: {
             type: Object,
@@ -46,6 +56,37 @@ export default {
             }
             catch(error){
                 console.log(error)
+            }
+        },
+        async selectFavoriteScenario(){
+            try{
+                const objService = new RegisterApplicationService()
+                const id = this.$route.params.id
+                this.infoFavoriteScenario.escenario_id = id
+                // Before to save this scenario in favorites, we need to check if it already exists
+                const response = await objService.validateFavoriteScenario(this.infoFavoriteScenario)
+                if(response.data.length > 0){
+                    Swal.fire({
+                        icon: "warning",
+                        title: "Espera",
+                        text: "No puedes agregar el mismo escenario dos veces.",
+                    });
+                }
+                else{
+                    await objService.createFavoriteScenario(this.infoFavoriteScenario)
+                    Swal.fire({
+                        icon: "success",
+                        title: "¡Escenario agregado!",
+                        text: "El escenario se ha guardado en tus favoritos.",
+                    });
+                }
+            }
+            catch(error){
+                Swal.fire({
+                    icon: "error",
+                    title: "Hay un error",
+                    text: "La página está presentando problemas ahora mismo.",
+                });
             }
         }
     }

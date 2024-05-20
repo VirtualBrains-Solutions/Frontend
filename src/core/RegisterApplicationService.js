@@ -124,6 +124,78 @@ class RegisterApplicationService{
             return error
         }
     }
+    async deleteUserById(id){
+        try{
+            await http.delete(`/users/delete/${id}`)
+        }
+        catch(error){
+            console.log(error)
+            return error
+        }
+    }
+    async deleteAllCommentsByUserId(id){
+        try{
+            await http.delete(`/comments/delete/user/${id}`)
+        }
+        catch(error){
+            console.log(error)
+            return error
+        }
+    }
+    async deleteAllFavoritesScenariosByUserId(id){
+        try{
+            await http.delete(`/scenarios/favorite/delete/all/${id}`)
+        }
+        catch(error){
+            console.log(error)
+            return error
+        }
+    }
+    async deleteAllSuggestByUserId(id){
+        try{
+            await http.delete(`/suggests/delete/all/${id}`)
+        }
+        catch(error){
+            console.log(error)
+            return error
+        }
+    }
+    async deleteAllSessionsByUserId(id){
+        try{
+            await http.delete(`/sessions/delete/all/${id}`)
+        }
+        catch(error){
+            console.log(error)
+            return error
+        }
+    }
+    async deleteAllPlansByUserId(id){
+        try{
+            await http.delete(`/plans/patient/delete/all/${id}`)
+        }
+        catch(error){
+            console.log(error)
+            return error
+        }
+    }
+    async changeUserStatus(id){
+        try{
+            await http.put(`/users/status/${id}`)
+        }
+        catch(error){
+            console.log(error)
+            return error
+        }
+    }
+    async deleteCommentById(id){
+        try{
+            await http.delete(`/comments/delete/comment/${id}`)
+        }
+        catch(error){
+            console.log(error)
+            return error
+        }
+    }
 }
 
 export default RegisterApplicationService;

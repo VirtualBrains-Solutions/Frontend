@@ -6,6 +6,7 @@
                 <div class="info-comment">
                     <img :src = "item.img_url_profile" class = "img-profile-comment" alt="">
                     <p>{{item.texto}}</p>
+                    <i class="fa-solid fa-trash ml-2 icon-delete" @click = "deleteComment(item.id[0])"></i>
                 </div>
             </article>
             <div class="container-input-comment">
@@ -56,6 +57,30 @@ export default {
 
                 }
             }
+        },
+        async deleteComment(id){
+            console.log(id)
+            Swal.fire({
+                title: "¿Estás seguro?",
+                text: "Se eliminará tu comentario.",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Sí, Eliminar",
+                cancelButtonText: "Cancelar"
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: "¡Eliminado!",
+                        text: "Tu comentario ha sido eliminado.",
+                        icon: "success"
+                    });
+                    const registerService = new RegisterApplicationService()
+                    await registerService.deleteCommentById(id)
+                    window.location.reload();
+                }
+            });
         }
     },
     created(){
@@ -101,6 +126,10 @@ export default {
     margin-left: 10px;
     padding: 10px;
     margin-bottom: 1px;
+}
+.icon-delete{
+    font-size:20px;
+    cursor: pointer;
 }
 @media(max-width: 900px){
     .container-section-comments{

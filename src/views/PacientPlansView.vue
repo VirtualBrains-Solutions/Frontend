@@ -1,5 +1,5 @@
 <template>
-    <h1>Pacient Plans View</h1>
+    <h1 class = "mt-4">Planes del Paciente</h1>
 </template>
 <script>
 

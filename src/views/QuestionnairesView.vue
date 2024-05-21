@@ -1,5 +1,5 @@
 <template>
-    <h1>Questions</h1>
+    <h1 class = "mt-4">Cuestionarios</h1>
 </template>
 <script>
 

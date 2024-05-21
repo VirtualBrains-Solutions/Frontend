@@ -196,6 +196,24 @@ class RegisterApplicationService{
             return error
         }
     }
+    async createUser(data){
+        try{
+            await http.post(`/users/`, data)
+        }
+        catch(error){
+            console.log(error)
+            return error
+        }
+    }
+    async loginUser(data){
+        try{
+            return await http.post(`/users/login`, data)
+        }
+        catch(error){
+            console.log(error)
+            return error
+        }
+    }
 }
 
 export default RegisterApplicationService;

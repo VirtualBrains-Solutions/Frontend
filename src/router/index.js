@@ -4,10 +4,13 @@ import ProfileView from "../views/ProfileView.vue"
 import IndividualScenarioView from "../views/IndividualScenarioView.vue"
 import SuggestView from "../views/SuggestView.vue"
 import QuestionnairesView from "../views/QuestionnairesView.vue"
-import PacientPlanView from "../views/PacientPlansView.vue"
-import PacientSessionView from "../views/PacientSessionView.vue"
+import PlansView from "../views/PlansView.vue"
+import ListPlansMedic from "../views/ListPlansMedic.vue";
 import LoginView from "../views/LoginView.vue"
 import RegisterView from "../views/RegisterView.vue"
+import RegisterPlanView from "../views/RegisterPlanView.vue";
+import PlanView from "../views/PlanView.vue"
+import RegisterGoal from "../views/RegisterGoal.vue";
 
 
 const router = createRouter({
@@ -45,12 +48,27 @@ const router = createRouter({
     {
       path:"/planes",
       name: "planes",
-      component: PacientPlanView
+      component: PlansView
     },
     {
-      path:"/sesiones",
-      name: "sesiones",
-      component: PacientSessionView
+      path:"/planes/:id",
+      name: "planes-id",
+      component: PlanView
+    },
+    {
+      path:"/planes/registrar",
+      name: "planes-registrar",
+      component: RegisterPlanView
+    },
+    {
+      path:"/planes/medico",
+      name: "planes-medico",
+      component: ListPlansMedic
+    },
+    {
+      path:"/planes/:id/metas/registrar",
+      name: "metas-registrar",
+      component: RegisterGoal
     },
     {
       path:"/iniciar-sesion",

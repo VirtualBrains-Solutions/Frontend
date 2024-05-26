@@ -15,9 +15,6 @@
                     <li class="nav-item active" @click = "$router.push('/cuestionarios')" >
                         <a class="nav-link" href="#">Cuestionarios</a>
                     </li>
-                    <li class="nav-item active" @click = "$router.push('/sesiones')" >
-                        <a class="nav-link" href="#">Sesiones</a>
-                    </li>
                     <li class="nav-item active" @click = "$router.push('/planes')" >
                         <a class="nav-link" href="#">Planes</a>
                     </li>

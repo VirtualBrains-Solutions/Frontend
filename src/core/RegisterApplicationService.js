@@ -214,6 +214,48 @@ class RegisterApplicationService{
             return error
         }
     }
+    async validateEmailPatient(data){
+        try {
+            const response =  await http.post('/users/search', data)
+            return response
+        }
+        catch(error){
+            console.log(error)
+            return error
+        }
+    }
+    async createPlan(data){
+        try{
+            await http.post("/plans/", data)
+        }
+        catch(error){
+            console.log(error)
+            return error
+        }
+    }
+    async getPlansByMedicalId(id){
+        try{
+            const response =  await http.get(`/plans/medic/${id}`)
+            const {data} = response
+            return data
+        }
+        catch(error){
+            console.log(error)
+            return error
+        }
+    }
+    async getPlanById(id){
+        try{
+            const response =  await http.get(`/plans/${id}`)
+            const {data} = response
+            console.log(data)
+            return data
+        }
+        catch(error){
+            console.log(error)
+            return error
+        }
+    }
 }
 
 export default RegisterApplicationService;

@@ -12,11 +12,18 @@
 <script>
 import Swal from "sweetalert2";
 import RegisterApplicationService from "../../core/RegisterApplicationService.js";
+import {appStoreGeneral} from "../../store/AppStore.js";
 export default{
     props:{
         infoUser: {
             type: Object,
             required: true
+        }
+    },
+    setup(){
+        const appStore = appStoreGeneral()
+        return {
+            appStore
         }
     },
     methods: {
@@ -37,6 +44,10 @@ export default{
                         text: "Tu usuario ha sido eliminado.",
                         icon: "success"
                     });
+
+                    // Delete the storage and the localstorage
+                    this.appStore.deleteUserInfo()
+                    localStorage.removeItem("userInfo")
 
                     const objService = new RegisterApplicationService()
 
@@ -64,6 +75,7 @@ export default{
                     // Finally, the user
                     //await objService.deleteUserById(this.infoUser.id)
                     await objService.changeUserStatus(this.infoUser.id)
+
 
                     // Move to register
                     this.$router.push('/registrarse');

@@ -10,30 +10,96 @@
         <div class="container-form-question">
             <p>¿No tienes una cuenta?</p> <span class = "ml-2" @click = "$router.push('/registrarse')">Registrate</span>
         </div>
-        <button class = "btn btn-primary mt-3" @click = "loginUser">Enviar</button>
+        <button class = "btn btn-primary mt-3" v-if = "this.validations.showButton" @click = "loginUser">Enviar</button>
+        <Spinner class = "mt-5 mb-5" v-if = "this.validations.showSpinner"/>
     </div>
 </template>
 <script>
 import RegisterApplicationService from "../core/RegisterApplicationService.js";
+import {appStoreGeneral} from "../store/AppStore.js";
+import Spinner from "../components/General/Spinner.vue"
+import Swal from "sweetalert2"
 export default{
     data(){
         return {
             userLogin:{
                 "email": "",
                 "password": ""
+            },
+            validations:{
+                showSpinner: false,
+                showButton: true
             }
 
         }
     },
+    components: {
+        Spinner
+    },
+    setup(){
+        const appStore = appStoreGeneral()
+        return {
+            appStore
+        }
+    },
     methods:{
         async loginUser(){
-            try{
-                const objService = new RegisterApplicationService()
-                const result = await objService.loginUser(this.userLogin)
-                console.log(result)
+            if(this.userLogin.email === ""){
+                Swal.fire({
+                    title: "¡Espera!",
+                    text: "Falta tu correo",
+                    icon: "warning"
+                });
             }
-            catch(error){
+            else{
+                if(this.userLogin.password === ""){
+                    Swal.fire({
+                        title: "¡Espera!",
+                        text: "Falta tu contraseña",
+                        icon: "warning"
+                    });
+                }
+                else{
+                    this.validations.showSpinner = true
+                    this.validations.showButton = false
+                    try{
+                        const objService = new RegisterApplicationService()
+                        const result = await objService.loginUser(this.userLogin)
 
+                        if(result.data.length > 0){
+                            if(result.data[0]["estado_usuario"] === "Eliminado"){
+                                Swal.fire({
+                                    title: "¡Espera!",
+                                    text: "Ese usuario ya fue eliminado",
+                                    icon: "warning"
+                                });
+                            }
+                            else{
+                                this.appStore.setUserInfo(result.data[0])
+                                this.appStore.saveState()
+                                this.$router.push('/escenarios');
+                            }
+                        }
+                        else{
+                            Swal.fire({
+                                title: "¡Error!",
+                                text: "Esos datos no le corresponden a un usuario",
+                                icon: "warning"
+                            });
+                        }
+                        this.validations.showSpinner = false
+                        this.validations.showButton = true
+                    }
+                    catch(error){
+                        Swal.fire({
+                            title: "¡Error!",
+                            text: "Hubo un problema en el servidor",
+                            icon: "error"
+                        });
+                        this.validations.showSpinner = false
+                        this.validations.showButton = true
+                    }
+                }
             }
         }
     }

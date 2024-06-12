@@ -6,7 +6,7 @@
                 <div class="info-comment">
                     <img :src = "item.img_url_profile" class = "img-profile-comment" alt="">
                     <p>{{item.texto}}</p>
-                    <i class="fa-solid fa-trash ml-2 icon-delete" @click = "deleteComment(item.id[0])"></i>
+                    <i class="fa-solid fa-trash ml-2 icon-delete" v-if = "item.id[1] === this.appStore.getUserId" @click = "deleteComment(item.id[0])"></i>
                 </div>
             </article>
             <div class="container-input-comment">
@@ -19,6 +19,7 @@
 <script>
 import getCurrentDate from "../../helpers/GetCurrentDate.js";
 import RegisterApplicationService from "../../core/RegisterApplicationService.js";
+import {appStoreGeneral} from "../../store/AppStore.js";
 import Swal from "sweetalert2";
 export default {
     data(){
@@ -26,9 +27,15 @@ export default {
             commentInfo: {
                 texto: "",
                 escenario_id: "",
-                usuario_id: 1,
+                usuario_id: "",
                 fecha_creacion: ""
             }
+        }
+    },
+    setup(){
+        const appStore = appStoreGeneral()
+        return {
+            appStore
         }
     },
     props: {
@@ -50,6 +57,7 @@ export default {
                 const registerService = new RegisterApplicationService()
                 this.commentInfo.fecha_creacion = getCurrentDate()
                 try{
+                    this.commentInfo.usuario_id = this.appStore.getUserId
                     await registerService.createComment(this.commentInfo)
                     window.location.reload();
                 }

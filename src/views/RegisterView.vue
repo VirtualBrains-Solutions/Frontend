@@ -14,21 +14,24 @@
             <input type="password" placeholder="Contraseña" v-model ="this.userRegister.password">
         </div>
         <select id="styled-select" class = "mt-1" v-model = "this.userRegister.tipo_usuario">
-            <option value="" selected>Seleccione opción</option>
+            <option value="" selected>Seleccione el tipo de usuario</option>
             <option value="Paciente">Paciente</option>
             <option value="Médico">Médico</option>
         </select>
-        <div class="container-form-element">
+        <!--<div class="container-form-element">
             <input type="file" placeholder="Sube tu foto">
-        </div>
+        </div> -->
         <div class="container-form-question">
             <p>¿Ya tienes una cuenta?</p> <span class = "ml-2" @click = "$router.push('/iniciar-sesion')">Iniciar sesión</span>
         </div>
-        <button class = "btn btn-primary mt-3" @click = "createUser">Enviar</button>
+        <button class = "btn btn-primary mt-3" @click = "createUser" v-if = "this.validations.showButton">Enviar</button>
+        <Spinner  v-if = "this.validations.showSpinner" class = "mt-5 mb-5"/>
     </div>
 </template>
 <script>
 import RegisterApplicationService from "../core/RegisterApplicationService.js";
+import Swal from "sweetalert2"
+import Spinner from "../components/General/Spinner.vue"
 import getCurrentDate from "../helpers/GetCurrentDate.js";
 export default{
     data(){
@@ -41,20 +44,51 @@ export default{
                 "fecha_creacion": "",
                 "password": "",
                 "tipo_usuario": "",
-                "img_url_profile": ""
+                "img_url_profile": "",
+                "estado_usuario": "Activo"
+            },
+            validations:{
+                showSpinner: false,
+                showButton: true
             }
         }
     },
+    components: {
+        Spinner
+    },
     methods: {
         async createUser(){
-            try{
-                this.userRegister.fecha_nacimiento = getCurrentDate()
-                this.userRegister.fecha_creacion = getCurrentDate()
-                const objService = new RegisterApplicationService()
-                await objService.createUser(this.userRegister)
+            if(this.userRegister.nombre === "" || this.userRegister.email === "" || this.userRegister.apellido === "" || this.userRegister.password === "" || this.userRegister.tipo_usuario === ""){
+                Swal.fire({
+                    title: "¡Espera!",
+                    text: "Todos los campos son obligatorios",
+                    icon: "warning"
+                });
             }
-            catch(error){
+            else{
+                this.validations.showSpinner = true
+                this.validations.showButton = false
+                try {
+                    this.userRegister.fecha_nacimiento = getCurrentDate()
+                    this.userRegister.fecha_creacion = getCurrentDate()
+                    const objService = new RegisterApplicationService()
+                    await objService.createUser(this.userRegister)
 
+                    this.$router.push('/iniciar-sesion')
+
+                    Swal.fire({
+                        title: "¡Registrado!",
+                        text: "Tu usuario se ha creado correctamente. Ahora inicia sesión.",
+                        icon: "success"
+                    });
+                    this.validations.showButton = true
+                    this.validations.showSpinner = false
+                }
+                catch(error){
+                    this.validations.showButton = true
+                    this.validations.showSpinner = false
+                    console.log(error)
+                }
             }
         }
     }

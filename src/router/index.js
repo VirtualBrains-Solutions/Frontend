@@ -18,7 +18,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: '/escenarios'
+      redirect: '/iniciar-sesion'
     },
     {
       path: '/escenarios',

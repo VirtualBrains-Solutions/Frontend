@@ -248,7 +248,26 @@ class RegisterApplicationService{
         try{
             const response =  await http.get(`/plans/${id}`)
             const {data} = response
-            console.log(data)
+            return data
+        }
+        catch(error){
+            console.log(error)
+            return error
+        }
+    }
+    async createGoal(data){
+        try{
+            await http.post(`/goals/`, data)
+        }
+        catch(error){
+            console.log(error)
+            return error
+        }
+    }
+    async getGoalsByPlanId(id){
+        try{
+            const response =  await http.get(`/goals/plan/${id}`)
+            const {data} = response
             return data
         }
         catch(error){

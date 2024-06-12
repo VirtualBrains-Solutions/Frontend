@@ -14,19 +14,35 @@
                 <i class="fa-solid fa-thumbs-down reaction-icon" @click = "changeDislikes"></i>
             </div>
         </div>
-        <button class = "btn btn-success mt-2" @click = "selectFavoriteScenario">Agregar a favoritos</button>
+        <button class = "btn btn-success mt-2" v-if = "this.validations.showButton" @click = "selectFavoriteScenario">Agregar a favoritos</button>
+        <Spinner class = "mt-5 mb-5" v-if = "this.validations.showSpinner" />
     </div>
 </template>
 <script>
 import RegisterApplicationService from "../../core/RegisterApplicationService.js";
+import {appStoreGeneral} from "../../store/AppStore.js";
 import Swal from "sweetalert2";
+import Spinner from "../../components/General/Spinner.vue"
 export default {
     data(){
         return {
             infoFavoriteScenario:{
-                "usuario_id": 1,
+                "usuario_id": "",
                 "escenario_id": ""
+            },
+            validations:{
+                showSpinner: false,
+                showButton: true
             }
+        }
+    },
+    components: {
+      Spinner
+    },
+    setup(){
+        const appStore = appStoreGeneral()
+        return {
+            appStore
         }
     },
     props: {
@@ -60,9 +76,12 @@ export default {
         },
         async selectFavoriteScenario(){
             try{
+                this.validations.showSpinner = true
+                this.validations.showButton = false
                 const objService = new RegisterApplicationService()
                 const id = this.$route.params.id
                 this.infoFavoriteScenario.escenario_id = id
+                this.infoFavoriteScenario.usuario_id = this.appStore.getUserId
                 // Before to save this scenario in favorites, we need to check if it already exists
                 const response = await objService.validateFavoriteScenario(this.infoFavoriteScenario)
                 if(response.data.length > 0){
@@ -80,6 +99,8 @@ export default {
                         text: "El escenario se ha guardado en tus favoritos.",
                     });
                 }
+                this.validations.showSpinner = false
+                this.validations.showButton = true
             }
             catch(error){
                 Swal.fire({

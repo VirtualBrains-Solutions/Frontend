@@ -2,8 +2,10 @@ import './assets/main.css'
 import "@mdi/font/css/materialdesignicons.css";
 import { createApp } from 'vue'
 import App from './App.vue'
+import {createPinia} from "pinia"
 import router from './router'
 import 'primeflex/primeflex.css';
+import {appStoreGeneral} from "./store/AppStore.js";
 
 // Vuetify
 import 'vuetify/styles'
@@ -17,9 +19,14 @@ const vuetify = createVuetify({
   })
 
 const app = createApp(App)
+const pinia = createPinia()
 
 app.use(router)
-
+app.use(pinia)
 app.use(vuetify)
+
+// load storage
+const storage = appStoreGeneral()
+storage.loadState()
 
 app.mount('#app')

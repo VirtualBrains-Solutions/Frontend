@@ -7,10 +7,12 @@
         <div class="container-form-element">
             <input type="password" placeholder="Contraseña" v-model = "this.userLogin.password">
         </div>
-        <div class="container-form-question">
-            <p>¿No tienes una cuenta?</p> <span class = "ml-2" @click = "$router.push('/registrarse')">Registrate</span>
+        <button class = "btn btn-primary mt-3 btn-login" v-if = "this.validations.showButton" @click = "loginUser">Enviar</button>
+        <div class="container-form-question mt-3" v-if = "this.validations.showButton">
+             <span class = "ml-2" @click = "$router.push('/recuperar-cuenta')">¿Has olvidado la contraseña?</span>
         </div>
-        <button class = "btn btn-primary mt-3" v-if = "this.validations.showButton" @click = "loginUser">Enviar</button>
+        <hr v-if = "this.validations.showButton">
+        <button class = "btn btn-primary mt-3 btn-green" v-if = "this.validations.showButton" @click = "$router.push('/registrarse')">Crear cuenta nueva</button>
         <Spinner class = "mt-5 mb-5" v-if = "this.validations.showSpinner"/>
     </div>
 </template>
@@ -19,6 +21,7 @@ import RegisterApplicationService from "../core/RegisterApplicationService.js";
 import {appStoreGeneral} from "../store/AppStore.js";
 import Spinner from "../components/General/Spinner.vue"
 import Swal from "sweetalert2"
+import router from "../router";
 export default{
     data(){
         return {
@@ -30,7 +33,6 @@ export default{
                 showSpinner: false,
                 showButton: true
             }
-
         }
     },
     components: {
@@ -40,6 +42,11 @@ export default{
         const appStore = appStoreGeneral()
         return {
             appStore
+        }
+    },
+    mounted() {
+        if(this.appStore.getLogeado){
+            router.push('/escenarios');
         }
     },
     methods:{
@@ -77,6 +84,10 @@ export default{
                             else{
                                 this.appStore.setUserInfo(result.data[0])
                                 this.appStore.saveState()
+                                // Check if the user is medic
+                                if(result.data[0]["tipo_usuario"] === "Medico"){
+                                    this.appStore.setMedicTrue()
+                                }
                                 this.$router.push('/escenarios');
                             }
                         }
@@ -127,7 +138,17 @@ export default{
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-
+}
+.btn-login{
+    width: 250px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.btn-green{
+    width: 250px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-color: #42B72A;
 }
 
 </style>

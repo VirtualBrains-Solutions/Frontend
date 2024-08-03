@@ -18,13 +18,11 @@
             <option value="Paciente">Paciente</option>
             <option value="Médico">Médico</option>
         </select>
-        <!--<div class="container-form-element">
-            <input type="file" placeholder="Sube tu foto">
-        </div> -->
-        <div class="container-form-question">
-            <p>¿Ya tienes una cuenta?</p> <span class = "ml-2" @click = "$router.push('/iniciar-sesion')">Iniciar sesión</span>
+        <v-file-input label="Foto de perfil" v-model = "this.userPhoto" variant = "outlined" class = "mt-3"></v-file-input>
+        <button class = "btn btn-primary mt-3 btn-register" @click = "createUser" v-if = "this.validations.showButton">Enviar</button>
+        <div class="container-form-question mt-3">
+            <span class = "ml-2" @click = "$router.push('/iniciar-sesion')">¿Ya tienes una cuenta?</span>
         </div>
-        <button class = "btn btn-primary mt-3" @click = "createUser" v-if = "this.validations.showButton">Enviar</button>
         <Spinner  v-if = "this.validations.showSpinner" class = "mt-5 mb-5"/>
     </div>
 </template>
@@ -33,6 +31,8 @@ import RegisterApplicationService from "../core/RegisterApplicationService.js";
 import Swal from "sweetalert2"
 import Spinner from "../components/General/Spinner.vue"
 import getCurrentDate from "../helpers/GetCurrentDate.js";
+import router from "../router";
+import {appStoreGeneral} from "../store/AppStore";
 export default{
     data(){
         return {
@@ -47,6 +47,7 @@ export default{
                 "img_url_profile": "",
                 "estado_usuario": "Activo"
             },
+            userPhoto: "",
             validations:{
                 showSpinner: false,
                 showButton: true
@@ -55,6 +56,17 @@ export default{
     },
     components: {
         Spinner
+    },
+    setup(){
+        const appStore = appStoreGeneral()
+        return {
+            appStore
+        }
+    },
+    mounted() {
+        if(this.appStore.getLogeado){
+            router.push('/escenarios');
+        }
     },
     methods: {
         async createUser(){
@@ -72,7 +84,7 @@ export default{
                     this.userRegister.fecha_nacimiento = getCurrentDate()
                     this.userRegister.fecha_creacion = getCurrentDate()
                     const objService = new RegisterApplicationService()
-                    await objService.createUser(this.userRegister)
+                    await objService.createUser(this.userRegister, this.userPhoto)
 
                     this.$router.push('/iniciar-sesion')
 
@@ -126,6 +138,11 @@ select {
     appearance: none;
     background-color: #fff;
     cursor: pointer;
+}
+.btn-register{
+    width: 250px;
+    font-size: 1.2rem;
+    font-weight: bold;
 }
 
 </style>

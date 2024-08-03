@@ -2,11 +2,16 @@
     <div class="container-section-comments">
         <h1 class = "mt-2">Comentarios</h1>
         <div class="container-comments">
-            <article v-for = "item in comments" class = "single-comment">
+            <article v-for = "item in comments" class = "single-comment mt-5">
                 <div class="info-comment">
                     <img :src = "item.img_url_profile" class = "img-profile-comment" alt="">
-                    <p>{{item.texto}}</p>
-                    <i class="fa-solid fa-trash ml-2 icon-delete" v-if = "item.id[1] === this.appStore.getUserId" @click = "deleteComment(item.id[0])"></i>
+                    <div class="container-info-comment">
+                        <p>{{item.nombre}} {{item.apellido}}</p>
+                        <div class = "container-info-comment-data">
+                            <p>{{item.texto}} </p>
+                            <i class="fa-solid fa-trash ml-2 icon-delete mt-1" v-if = "item.id[1] === this.appStore.getUserId" @click = "deleteComment(item.id[0])"></i>
+                        </div>
+                    </div>
                 </div>
             </article>
             <div class="container-input-comment">
@@ -138,6 +143,9 @@ export default {
 .icon-delete{
     font-size:20px;
     cursor: pointer;
+}
+.container-info-comment-data{
+    display: flex;
 }
 @media(max-width: 900px){
     .container-section-comments{

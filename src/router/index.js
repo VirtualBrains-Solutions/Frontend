@@ -11,6 +11,8 @@ import RegisterView from "../views/RegisterView.vue"
 import RegisterPlanView from "../views/RegisterPlanView.vue";
 import PlanView from "../views/PlanView.vue"
 import RegisterGoal from "../views/RegisterGoal.vue";
+import RecoverPassword from "../views/RecoverPassword.vue";
+import ChangePassword from "../views/ChangePassword.vue";
 
 
 const router = createRouter({
@@ -79,6 +81,16 @@ const router = createRouter({
       path: "/registrarse",
       name: "registrarse",
       component: RegisterView
+    },
+    {
+      path: "/recuperar-cuenta",
+      name: "recuperar-cuenta",
+      component: RecoverPassword
+    },
+    {
+      path: "/change-password/:token",
+      name: "change-password",
+      component: ChangePassword
     }
   ]
 })

@@ -196,9 +196,22 @@ class RegisterApplicationService{
             return error
         }
     }
-    async createUser(data){
+    async createUser(data, userPhoto){
+        const formData = new FormData();
+        formData.append("nombre", data.nombre)
+        formData.append("apellido", data.apellido)
+        formData.append("fecha_nacimiento", data.fecha_nacimiento)
+        formData.append("email", data.email)
+        formData.append("password", data.password)
+        formData.append("tipo_usuario", data.tipo_usuario)
+        formData.append("fecha_creacion", data.fecha_creacion)
+        formData.append("userPhoto", userPhoto[0])
         try{
-            await http.post(`/users/`, data)
+            await http.post(`/users/`, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
+            })
         }
         catch(error){
             console.log(error)
@@ -244,6 +257,18 @@ class RegisterApplicationService{
             return error
         }
     }
+    async getPlansByPatientId(id){
+        try{
+            const response =  await http.get(`/plans/patient/${id}`)
+            const {data} = response
+            return data
+        }
+        catch(error){
+            console.log(error)
+            return error
+        }
+    }
+
     async getPlanById(id){
         try{
             const response =  await http.get(`/plans/${id}`)
@@ -269,6 +294,38 @@ class RegisterApplicationService{
             const response =  await http.get(`/goals/plan/${id}`)
             const {data} = response
             return data
+        }
+        catch(error){
+            console.log(error)
+            return error
+        }
+    }
+
+    async changeStatusGoalToComplete(id){
+        try{
+            const response =  await http.put(`/goals/plan/update/complete/${id}`)
+            const {data} = response
+            return data
+        }
+        catch(error){
+            console.log(error)
+            return error
+        }
+    }
+
+    async recoverPassword(data){
+        try {
+            await http.post('/users/recover-password', data)
+        }
+        catch(error){
+            console.log(error)
+            return error
+        }
+    }
+
+    async updatePassword(data){
+        try {
+            await http.put('/users/update-password', data)
         }
         catch(error){
             console.log(error)

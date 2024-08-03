@@ -3,17 +3,21 @@ import {defineStore} from "pinia"
 export const appStoreGeneral = defineStore("main", {
     state:() => ({
         userInfo: null,
-        logeado: false
+        logeado: false,
+        isMedic: false
     }),
     getters: {
         getUserInfo: (state) => state.userInfo,
         getLogeado: (state) => state.logeado,
-        getUserId: (state) => state.userInfo.id
+        getUserId: (state) => state.userInfo.id,
+        getTypeUser: (state) => state.tipo_usuario,
+        getIsMedic: (state) => state.isMedic
     },
     actions: {
         deleteUserInfo(){
-            this.userInfo = {}
+            this.userInfo = null
             this.logeado = false
+            this.isMedic = false
         },
         setUserInfo(newUserInfo){
             this.userInfo = newUserInfo
@@ -29,6 +33,9 @@ export const appStoreGeneral = defineStore("main", {
                 this.userInfo = JSON.parse(state)
                 this.logeado = true
             }
+        },
+        setMedicTrue(){
+            this.isMedic = true
         }
     }
 })

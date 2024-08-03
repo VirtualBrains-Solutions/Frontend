@@ -29,4 +29,12 @@ app.use(vuetify)
 const storage = appStoreGeneral()
 storage.loadState()
 
+let validateURLToken = window.location.href.toString().includes("change-password")
+
+if(!storage.getLogeado){
+    if(!validateURLToken){
+        router.push("/iniciar-sesion")
+    }
+}
+
 app.mount('#app')

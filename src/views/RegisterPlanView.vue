@@ -30,15 +30,23 @@ import Swal from "sweetalert2"
 import RegisterApplicationService from "../core/RegisterApplicationService"
 import Spinner from "../components/General/Spinner.vue"
 import getCurrentDate from "../helpers/GetCurrentDate";
+import {appStoreGeneral} from "../store/AppStore.js";
+
 export default {
     components:{
         Spinner
+    },
+    setup(){
+        const appStore = appStoreGeneral()
+        return {
+            appStore
+        }
     },
     data(){
         return{
             planInfo: {
                 fecha_creacion: "",
-                especialista_id: 2,
+                especialista_id: "",
                 paciente_id: "",
                 descripcion_plan: "",
                 nombre_plan: ""
@@ -78,6 +86,8 @@ export default {
                             this.planInfo.fecha_creacion = getCurrentDate()
                             // Set the patient id
                             this.planInfo.paciente_id = response.data[0].id
+                            //  Before to create the plan, set the medic id
+                            this.planInfo.especialista_id = this.appStore.getUserId
                             // Now, we create the plan
                             await objService.createPlan(this.planInfo)
                             Swal.fire({

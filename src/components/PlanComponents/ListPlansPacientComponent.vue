@@ -1,31 +1,31 @@
 <template>
-    <h1 class = "mt-4">Planes creados</h1>
-    <p>Estos son todos los planes que has creado.</p>
+    <p v-if = "this.plans.length > 0">Aquí podrás ver los planes que han creado tus médicos.</p>
+    <p v-else>No tienes planes registrados.</p>
     <div class="container-plans">
         <article v-for = "plan in this.plans" class = "mt-5">
+            <p><span>Especialista:</span> {{plan.nombre}}</p>
             <p><span>Nombre del plan:</span>{{plan.nombre_plan}}</p>
-            <p><span>Paciente:</span> {{plan.nombre}}</p>
             <button class = "btn btn-primary w-100" @click = "$router.push(`/planes/${plan.id[0]}`)">Ver</button>
         </article>
     </div>
-    <Spinner class = "mt-5 mb-5" v-if = "this.validations.showSpinner"/>
+    <Spinner class = "mt-5 mb-5" v-if = "this.validations.showSpinner" />
 </template>
 <script>
-import RegisterApplicationService from "../../core/RegisterApplicationService.js";
+import Spinner from "../General/Spinner.vue";
 import {appStoreGeneral} from "../../store/AppStore.js";
-import Spinner from "../../components/General/Spinner.vue"
+import RegisterApplicationService from "../../core/RegisterApplicationService";
 
 export default{
-   data(){
-       return {
-           plans: [],
-           validations: {
-               showSpinner: false
-           }
-       }
-   },
+    data(){
+        return {
+            plans: [],
+            validations: {
+                showSpinner: false
+            }
+        }
+    },
     components: {
-       Spinner
+        Spinner
     },
     setup(){
         const appStore = appStoreGeneral()
@@ -34,18 +34,17 @@ export default{
         }
     },
     async created() {
-       this.validations.showSpinner = true
-       try{
-           const objService = new RegisterApplicationService()
-           this.plans = await objService.getPlansByMedicalId(this.appStore.getUserId)
-       }
-       catch(error){
+        this.validations.showSpinner = true
+        try{
+            const objService = new RegisterApplicationService()
+            this.plans = await objService.getPlansByPatientId(this.appStore.getUserId)
+        }
+        catch(error){
 
-       }
+        }
         this.validations.showSpinner = false
     }
 }
-
 </script>
 <style scoped>
 .container-plans{
@@ -56,5 +55,4 @@ export default{
 article span{
     font-weight: bold;
 }
-
 </style>

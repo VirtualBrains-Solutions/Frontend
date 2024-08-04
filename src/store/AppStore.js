@@ -11,7 +11,9 @@ export const appStoreGeneral = defineStore("main", {
         getLogeado: (state) => state.logeado,
         getUserId: (state) => state.userInfo.id,
         getTypeUser: (state) => state.tipo_usuario,
-        getIsMedic: (state) => state.isMedic
+        getIsMedic: (state) => state.isMedic,
+        getUserName: (state) => state.userInfo.nombre,
+        getUserLastName: (state) => state.userInfo.apellido
     },
     actions: {
         deleteUserInfo(){

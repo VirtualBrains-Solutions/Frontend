@@ -47,6 +47,9 @@ export default{
 }
 </script>
 <style scoped>
+.margin-top-navbar{
+    margin-top: 70px;
+}
 .container-plans{
     display: grid;
     grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );

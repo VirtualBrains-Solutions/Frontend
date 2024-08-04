@@ -1,5 +1,5 @@
 <template>
-    <h1 class = "mt-4">Planes creados</h1>
+    <h1 class = "margin-top-navbar">Planes creados</h1>
     <p>Estos son todos los planes que has creado.</p>
     <div class="container-plans">
         <article v-for = "plan in this.plans" class = "mt-5">
@@ -48,6 +48,9 @@ export default{
 
 </script>
 <style scoped>
+.margin-top-navbar{
+    margin-top: 70px;
+}
 .container-plans{
     display: grid;
     grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );

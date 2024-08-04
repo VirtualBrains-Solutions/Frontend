@@ -1,5 +1,5 @@
 <template>
-    <h1 class = "mt-4">Plan individual</h1>
+    <h1 class = "margin-top-navbar">Plan individual</h1>
     <p><span>Plan:</span> {{this.planInfo.nombre_plan}}</p>
     <p><span>Descripción:</span> {{this.planInfo.descripcion_plan}}</p>
     <p v-if = "this.appStore.getIsMedic"><span>Paciente:</span> {{this.planInfo.nombre}} {{this.planInfo.apellido}}</p>
@@ -15,13 +15,13 @@
                 </div>
             </div>
         </article>
-        <button class = "btn btn-success mt-5 mb-5" @click = "$router.push(`/planes/${this.id}/metas/registrar`)" v-if = "this.appStore.getIsMedic">Agregar meta</button>
     </div>
+    <button class = "btn btn-success mt-5 mb-5" @click = "$router.push(`/planes/${this.id}/metas/registrar`)" v-if = "this.appStore.getIsMedic">Agregar meta</button>
     <div v-if = "!this.goals.length >0">
         <p>No hay metas registradas para este plan.</p>
     </div>
     <button class = "btn btn-danger mt-5 ml-4 mb-5" v-if = "this.appStore.getIsMedic" @click = "$router.push('/planes/medico')">Volver</button>
-    <button v-else class = "btn btn-danger mt-5 ml-4 mb-5" @click = "$router.push('/planes')">Volver</button>
+    <button v-else class = "btn btn-danger mt-5 mb-5" @click = "$router.push('/planes')">Volver</button>
     <Spinner class = "mt-5 mb-5" v-if = "this.validations.showSpinner"/>
 </template>
 <script>
@@ -87,6 +87,9 @@ export default {
 
 </script>
 <style scoped>
+.margin-top-navbar{
+    margin-top: 70px;
+}
 p span{
     font-weight: bold;
 }

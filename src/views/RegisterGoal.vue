@@ -1,5 +1,5 @@
 <template>
-    <h1 class = "mt-4">Agregar Meta</h1>
+    <h1 class = "margin-top-navbar">Agregar Meta</h1>
     <v-textarea class = "mt-4" label="Descripción de la meta" variant="outlined" v-model = "this.goalInfo.descripcion"></v-textarea>
     <button class = "btn btn-success" @click = "registerGoal" v-if = "this.validations.showButton">Agregar</button>
     <button class = "btn btn-danger ml-4" @click = "$router.push(`/planes/${this.planId}`)" v-if = "this.validations.showButton">Volver</button>
@@ -74,5 +74,8 @@ export default {
 
 </script>
 <style scoped>
+.margin-top-navbar{
+    margin-top: 70px;
+}
 
 </style>

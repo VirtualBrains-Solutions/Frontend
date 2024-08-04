@@ -1,9 +1,17 @@
 <template>
-    <h1 class = "mt-4">Recupera tu cuenta</h1>
+    <h1 class = "margin-top-navbar">Recupera tu cuenta</h1>
     <div class="container-form-element">
-        <input type="email" placeholder="Ingresa el correo de tu cuenta" required v-model = "this.userInfo.email">
+        <v-text-field
+            type = "text"
+            label = "Ingresa el correo de tu cuenta"
+            variant = "outlined"
+            required
+            v-model = "this.userInfo.email"
+        >
+        </v-text-field>
     </div>
     <button class = "btn btn-primary mt-3 btn-style" v-if = "this.validations.showButton" @click = "this.recoverPassword">Enviar</button>
+    <button class = "btn btn-success mt-3 btn-style margin-top-cel" @click = "$router.push('/iniciar-sesion')" >Volver</button>
     <Spinner class = "mt-5 mb-2" v-if = "this.validations.showSpinner" />
 </template>
 <script>
@@ -67,6 +75,9 @@ export default{
 }
 </script>
 <style scoped>
+.margin-top-navbar{
+    margin-top: 70px;
+}
 .container-form-element input{
     width: 100%;
     padding: 12px 20px;
@@ -80,6 +91,15 @@ export default{
     width: 250px;
     font-size: 1.2rem;
     font-weight: bold;
+}
+.margin-top-cel{
+    margin-left: 10px;
+}
+@media(max-width: 600px ){
+    .margin-top-cel{
+        margin-top: 10px;
+        margin-left: 0px;
+    }
 }
 
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <h1 class = "mt-4">Ingresa tu nueva contraseña</h1>
+    <h1 class = "margin-top-navbar">Ingresa tu nueva contraseña</h1>
     <div class="container-form-element">
         <input type="password" placeholder="Nueva contraseña" v-model = "this.userInfo.newPassword">
     </div>
@@ -89,6 +89,9 @@ export default{
 }
 </script>
 <style scoped>
+.margin-top-navbar{
+    margin-top: 70px;
+}
 .container-form-element input{
     width: 100%;
     padding: 12px 20px;

@@ -1,5 +1,5 @@
 <template>
-    <h1 class = "mt-2">Sugerencias</h1>
+    <h1 class = "margin-top-navbar">Sugerencias</h1>
     <p>Es fundamental para nosotros continuar mejorando nuestra plataforma.
         Por favor, déjanos tus sugerencias y ayúdanos a brindar un mejor servicio a más personas.</p>
     <h5>Tipo de sugerencia</h5>
@@ -62,6 +62,9 @@ export default{
 
 </script>
 <style scoped>
+.margin-top-navbar{
+    margin-top: 70px;
+}
 select {
     width: 100%;
     padding: 10px;

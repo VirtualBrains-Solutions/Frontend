@@ -1,5 +1,5 @@
 <template>
-    <h1 class = "mt-4">Planes</h1>
+    <h1 class = "margin-top-navbar">Planes</h1>
     <div v-if = "appStore.getIsMedic">
         <p>Aquí podrás registrar los planes de seguimiento de tus pacientes.
             Primero, debes crear el plan que seguirá tu paciente y luego establecer las metas a cumplir.</p>
@@ -33,6 +33,8 @@ export default {
 
 </script>
 <style scoped>
-
+.margin-top-navbar{
+    margin-top: 70px;
+}
 
 </style>

@@ -1,17 +1,45 @@
 <template>
-    <h1 class = "mt-4">Regístrate</h1>
+    <h1 class = "margin-top-navbar">Regístrate</h1>
     <div class="container-form">
         <div class="container-form-element">
-            <input type="text" placeholder="Nombre" v-model = "this.userRegister.nombre">
+            <v-text-field
+                type = "text"
+                label = "Nombre"
+                variant = "outlined"
+                required
+                v-model = "this.userRegister.nombre"
+            >
+            </v-text-field>
         </div>
         <div class="container-form-element">
-            <input type="text" placeholder="Apellido" v-model = "this.userRegister.apellido">
+            <v-text-field
+                type = "text"
+                label = "Apellido"
+                variant = "outlined"
+                required
+                v-model = "this.userRegister.apellido"
+            >
+            </v-text-field>
         </div>
         <div class="container-form-element">
-            <input type="text" placeholder="Correo" v-model = "this.userRegister.email">
+            <v-text-field
+                type = "text"
+                label = "Correo"
+                variant = "outlined"
+                required
+                v-model = "this.userRegister.email"
+            >
+            </v-text-field>
         </div>
         <div class="container-form-element">
-            <input type="password" placeholder="Contraseña" v-model ="this.userRegister.password">
+            <v-text-field
+                type = "password"
+                label = "Contraseña"
+                variant = "outlined"
+                required
+                v-model ="this.userRegister.password"
+            >
+            </v-text-field>
         </div>
         <select id="styled-select" class = "mt-1" v-model = "this.userRegister.tipo_usuario">
             <option value="" selected>Seleccione el tipo de usuario</option>
@@ -108,6 +136,9 @@ export default{
 
 </script>
 <style scoped>
+.margin-top-navbar{
+    margin-top: 70px;
+}
 .container-form{
     margin-top: 10px;
 }

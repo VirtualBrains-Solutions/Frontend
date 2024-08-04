@@ -1,5 +1,5 @@
 <template>
-    <h1 class = "mt-2">Información de usuario</h1>
+    <h1 class = "margin-top-navbar">Información de usuario</h1>
     <img :src = "infoUser.img_url_profile" alt="" class = "profile-img">
     <div class="info-user">
         <p><span>Nombre</span>: {{infoUser.nombre}}</p>
@@ -7,7 +7,8 @@
         <p><span>Tipo de usuario</span>: {{infoUser.tipo_usuario}}</p>
         <p><span>Correo</span>: {{infoUser.email}}</p>
     </div>
-    <button class = " ml-2 btn btn-danger" @click = "deleteUserById">Eliminar usuario</button>
+    <button class = "ml-2 btn btn-success"  @click = "$router.push('/actualizar-informacion')">Actualizar información</button>
+    <button class = "ml-2 btn btn-danger margin-top-cel" @click = "deleteUserById">Eliminar usuario</button>
 </template>
 <script>
 import Swal from "sweetalert2";
@@ -87,6 +88,9 @@ export default{
 
 </script>
 <style scoped>
+.margin-top-navbar{
+    margin-top: 70px;
+}
 .profile-img{
     width: 250px;
     height: 250px;
@@ -101,6 +105,11 @@ export default{
 }
 span{
     font-weight: bold;
+}
+@media(max-width: 400px ){
+    .margin-top-cel{
+        margin-top: 10px;
+    }
 }
 
 </style>

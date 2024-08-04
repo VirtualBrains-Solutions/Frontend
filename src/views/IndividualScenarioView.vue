@@ -1,5 +1,5 @@
 <template>
-    <div class="container-indivisualscenario">
+    <div class="container-indivisualscenario margin-top-navbar">
         <InfoScenarioComponent :scenario-info="scenarioInfo"/>
         <CommentsScenarioComponent :comments="comments"/>
     </div>
@@ -38,6 +38,9 @@ export default {
 }
 </script>
 <style scoped>
+.margin-top-navbar{
+    margin-top: 70px;
+}
 .container-indivisualscenario{
     display: flex;
 }

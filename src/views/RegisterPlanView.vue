@@ -1,5 +1,5 @@
 <template>
-    <h1 class = "mt-4">Registrar Plan</h1>
+    <h1 class = "margin-top-navbar">Registrar Plan</h1>
     <v-text-field
         type = "text"
         ref = "myComboBox"
@@ -142,6 +142,9 @@ export default {
 
 </script>
 <style scoped>
+.margin-top-navbar{
+    margin-top: 70px;
+}
 
 
 </style>

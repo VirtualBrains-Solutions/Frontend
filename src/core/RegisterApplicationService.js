@@ -332,6 +332,25 @@ class RegisterApplicationService{
             return error
         }
     }
+
+    async updateUserInfoMethod(data, userPhoto){
+        const formData = new FormData();
+        formData.append("nombre", data.nombre)
+        formData.append("apellido", data.apellido)
+        formData.append("id", data.id)
+        formData.append("userUpdatePhoto", userPhoto[0])
+        try{
+            await http.put(`/users/change-info`, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
+            })
+        }
+        catch(error){
+            console.log(error)
+            return error
+        }
+    }
 }
 
 export default RegisterApplicationService;

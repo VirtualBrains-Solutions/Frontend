@@ -32,6 +32,7 @@ export default{
             const objService = new RegisterApplicationService()
             const result = await objService.getUserInfoById(this.appStore.getUserId)
             this.userInfo = result[0]
+            this.appStore.setUserInfo(result[0])
 
             // Get the favorites scenarios from the user
             this.favoritesScenarios = await objService.getFavoriteScenariosByUser(this.appStore.getUserId)
@@ -44,5 +45,7 @@ export default{
 
 </script>
 <style scoped>
-
+.margin-top-navbar{
+    margin-top: 70px;
+}
 </style>

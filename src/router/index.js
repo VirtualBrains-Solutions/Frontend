@@ -13,6 +13,7 @@ import PlanView from "../views/PlanView.vue"
 import RegisterGoal from "../views/RegisterGoal.vue";
 import RecoverPassword from "../views/RecoverPassword.vue";
 import ChangePassword from "../views/ChangePassword.vue";
+import UpdateUserInfoView from "../views/UpdateUserInfoView.vue";
 
 
 const router = createRouter({
@@ -88,9 +89,14 @@ const router = createRouter({
       component: RecoverPassword
     },
     {
-      path: "/change-password/:token",
+      path: "/cambiar-password/:token",
       name: "change-password",
       component: ChangePassword
+    },
+    {
+      path: "/actualizar-informacion",
+      name: "actualizar-informacion",
+      component: UpdateUserInfoView
     }
   ]
 })

@@ -1,11 +1,25 @@
 <template>
-    <h1 class = "mt-4">Iniciar Sesión</h1>
+    <h1 class = "margin-top-navbar">Iniciar Sesión</h1>
     <div class="container-form">
         <div class="container-form-element">
-            <input type="text" placeholder="Correo" v-model = "this.userLogin.email">
+            <v-text-field
+                type = "text"
+                label = "Correo"
+                variant = "outlined"
+                required
+                v-model = "this.userLogin.email"
+            >
+            </v-text-field>
         </div>
         <div class="container-form-element">
-            <input type="password" placeholder="Contraseña" v-model = "this.userLogin.password">
+            <v-text-field
+                type = "password"
+                label = "Contraseña"
+                variant = "outlined"
+                required
+                v-model = "this.userLogin.password"
+            >
+            </v-text-field>
         </div>
         <button class = "btn btn-primary mt-3 btn-login" v-if = "this.validations.showButton" @click = "loginUser">Enviar</button>
         <div class="container-form-question mt-3" v-if = "this.validations.showButton">
@@ -85,7 +99,7 @@ export default{
                                 this.appStore.setUserInfo(result.data[0])
                                 this.appStore.saveState()
                                 // Check if the user is medic
-                                if(result.data[0]["tipo_usuario"] === "Medico"){
+                                if(result.data[0]["tipo_usuario"] === "Médico"){
                                     this.appStore.setMedicTrue()
                                 }
                                 this.$router.push('/escenarios');
@@ -118,6 +132,9 @@ export default{
 
 </script>
 <style scoped>
+.margin-top-navbar{
+    margin-top: 70px;
+}
 .container-form{
     margin-top: 10px;
 }

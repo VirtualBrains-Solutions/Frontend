@@ -1,7 +1,7 @@
 <template>
     <div class="container-indivisualscenario margin-top-navbar">
         <InfoScenarioComponent :scenario-info="scenarioInfo"/>
-        <CommentsScenarioComponent :comments="comments"/>
+        <CommentsScenarioComponent/>
     </div>
 </template>
 

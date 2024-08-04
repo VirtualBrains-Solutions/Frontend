@@ -23,7 +23,7 @@
         </div>
         <button class = "btn btn-primary mt-3 btn-login" v-if = "this.validations.showButton" @click = "loginUser">Enviar</button>
         <div class="container-form-question mt-3" v-if = "this.validations.showButton">
-             <span class = "ml-2" @click = "$router.push('/recuperar-cuenta')">¿Has olvidado la contraseña?</span>
+             <span class = "ml-2" @click = "$router.push('/recuperar-cuenta')">¿Has olvidado tu contraseña?</span>
         </div>
         <hr v-if = "this.validations.showButton">
         <button class = "btn btn-primary mt-3 btn-green" v-if = "this.validations.showButton" @click = "$router.push('/registrarse')">Crear cuenta nueva</button>

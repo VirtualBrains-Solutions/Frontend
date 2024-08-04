@@ -49,7 +49,7 @@
         <v-file-input label="Foto de perfil" v-model = "this.userPhoto" variant = "outlined" class = "mt-3"></v-file-input>
         <button class = "btn btn-primary mt-3 btn-register" @click = "createUser" v-if = "this.validations.showButton">Enviar</button>
         <div class="container-form-question mt-3">
-            <span class = "ml-2" @click = "$router.push('/iniciar-sesion')">¿Ya tienes una cuenta?</span>
+            <span class = "ml-2" @click = "$router.push('/iniciar-sesion')" v-if = "this.validations.showButton">¿Ya tienes una cuenta?</span>
         </div>
         <Spinner  v-if = "this.validations.showSpinner" class = "mt-5 mb-5"/>
     </div>

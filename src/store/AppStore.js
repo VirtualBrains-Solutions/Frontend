@@ -13,7 +13,9 @@ export const appStoreGeneral = defineStore("main", {
         getTypeUser: (state) => state.tipo_usuario,
         getIsMedic: (state) => state.isMedic,
         getUserName: (state) => state.userInfo.nombre,
-        getUserLastName: (state) => state.userInfo.apellido
+        getUserLastName: (state) => state.userInfo.apellido,
+        getURLPhoto: (state) => state.userInfo.img_url_profile,
+        getPassword: (state) => state.userInfo.password
     },
     actions: {
         deleteUserInfo(){
@@ -38,6 +40,9 @@ export const appStoreGeneral = defineStore("main", {
         },
         setMedicTrue(){
             this.isMedic = true
+        },
+        setPassword(password){
+            this.userInfo.password = password
         }
     }
 })

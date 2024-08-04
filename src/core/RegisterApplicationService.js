@@ -351,6 +351,26 @@ class RegisterApplicationService{
             return error
         }
     }
+
+    async createCommentChild(data){
+        try {
+            await http.post("/comments/child", data)
+        }
+        catch(error){
+            console.log(error)
+            return error
+        }
+    }
+
+    async updatePasswordByUserId(data){
+        try {
+            await http.put('/users/change-password', data)
+        }
+        catch(error){
+            console.log(error)
+            return error
+        }
+    }
 }
 
 export default RegisterApplicationService;

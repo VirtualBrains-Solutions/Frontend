@@ -13,7 +13,8 @@ import PlanView from "../views/PlanView.vue"
 import RegisterGoal from "../views/RegisterGoal.vue";
 import RecoverPassword from "../views/RecoverPassword.vue";
 import ChangePassword from "../views/ChangePassword.vue";
-import UpdateUserInfoView from "../views/UpdateUserInfoView.vue";
+import UpdateUserInfoView from "../views/UpdateUserInfoView.vue"
+import ChangePasswordWithoutTokenView from "../views/ChangePasswordWithoutTokenView.vue"
 
 
 const router = createRouter({
@@ -97,6 +98,11 @@ const router = createRouter({
       path: "/actualizar-informacion",
       name: "actualizar-informacion",
       component: UpdateUserInfoView
+    },
+    {
+      path: "/actualizar-password",
+      name: "actualizar-password",
+      component: ChangePasswordWithoutTokenView
     }
   ]
 })

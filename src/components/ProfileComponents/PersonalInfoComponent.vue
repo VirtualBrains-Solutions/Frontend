@@ -8,6 +8,7 @@
         <p><span>Correo</span>: {{infoUser.email}}</p>
     </div>
     <button class = "ml-2 btn btn-success"  @click = "$router.push('/actualizar-informacion')">Actualizar información</button>
+    <button class = "btn btn-info ml-2 margin-top-cel" @click = "$router.push('/actualizar-password')">Cambiar contraseña</button>
     <button class = "ml-2 btn btn-danger margin-top-cel" @click = "deleteUserById">Eliminar usuario</button>
 </template>
 <script>

@@ -127,6 +127,12 @@ export default {
             });
         },
         showAnswersOrResponse(id){
+            // Close previous comments
+            for(let i = 0; i < this.comments.length; i++) {
+                if (this.comments[i].showAnswersOrResponse){
+                    this.comments[i].showAnswersOrResponse = false
+                }
+            }
             for(let i = 0; i < this.comments.length; i++){
                 if(parseInt(this.comments[i].id[0]) === id) {
                     this.comments[i].showAnswersOrResponse = !this.comments[i].showAnswersOrResponse

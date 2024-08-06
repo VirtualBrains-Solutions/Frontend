@@ -75,6 +75,9 @@ export default{
                 "img_url_profile": "",
                 "estado_usuario": "Activo"
             },
+            userEmailValidate: {
+              "email": ""
+            },
             userPhoto: "",
             validations:{
                 showSpinner: false,
@@ -112,15 +115,30 @@ export default{
                     this.userRegister.fecha_nacimiento = getCurrentDate()
                     this.userRegister.fecha_creacion = getCurrentDate()
                     const objService = new RegisterApplicationService()
-                    await objService.createUser(this.userRegister, this.userPhoto)
 
-                    this.$router.push('/iniciar-sesion')
+                    this.userEmailValidate.email = this.userRegister.email
 
-                    Swal.fire({
-                        title: "¡Registrado!",
-                        text: "Tu usuario se ha creado correctamente. Ahora inicia sesión.",
-                        icon: "success"
-                    });
+                    // Validate if there's a user with that email
+                    const responseUserSearch = await objService.validateEmailPatient(this.userEmailValidate)
+
+                    if(responseUserSearch.data.length > 0){
+                        Swal.fire({
+                            title: "¡Cuidado!",
+                            text: "Ya existe una cuenta creada con ese correo",
+                            icon: "warning"
+                        });
+                    }
+                    else{
+                        await objService.createUser(this.userRegister, this.userPhoto)
+
+                        this.$router.push('/iniciar-sesion')
+
+                        Swal.fire({
+                            title: "¡Registrado!",
+                            text: "Tu usuario se ha creado correctamente. Ahora inicia sesión.",
+                            icon: "success"
+                        });
+                    }
                     this.validations.showButton = true
                     this.validations.showSpinner = false
                 }

@@ -3,11 +3,14 @@
     <p>Es fundamental para nosotros continuar mejorando nuestra plataforma.
         Por favor, déjanos tus sugerencias y ayúdanos a brindar un mejor servicio a más personas.</p>
     <h5>Tipo de sugerencia</h5>
-    <select id="styled-select" v-model = "this.infoSuggest.tipo_sugerencia">
-        <option value="option1">Realidad Virtual</option>
-        <option value="option2">Aplicación Web</option>
-        <option value="option3">Otros</option>
-    </select>
+    <div class="form-group father-element">
+        <select  class="form-control" id="exampleFormControlSelect1" v-model = "this.infoSuggest.tipo_sugerencia">
+            <option value="option1">Realidad Virtual</option>
+            <option value="option2">Aplicación Web</option>
+            <option value="option3">Otros</option>
+        </select>
+        <i class="fa-solid fa-angle-down child-element"></i>
+    </div>
     <v-textarea class = "mt-4" label="Deja tu comentario" variant="outlined" v-model = "this.infoSuggest.comentario_sugerencia"></v-textarea>
     <button class = "btn btn-primary" @click = "this.createSuggest">Enviar</button>
 </template>
@@ -65,14 +68,13 @@ export default{
 .margin-top-navbar{
     margin-top: 70px;
 }
-select {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    appearance: none;
-    background-color: #fff;
-    cursor: pointer;
+
+.father-element{
+    position: relative;
+}
+.child-element{
+    position: absolute;
+    right: 10px;
+    top: 12px;
 }
 </style>

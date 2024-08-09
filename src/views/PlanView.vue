@@ -3,6 +3,8 @@
     <p><span>Plan:</span> {{this.planInfo.nombre_plan}}</p>
     <p><span>Descripción:</span> {{this.planInfo.descripcion_plan}}</p>
     <p v-if = "this.appStore.getIsMedic"><span>Paciente:</span> {{this.planInfo.nombre}} {{this.planInfo.apellido}}</p>
+    <StatisticInfoComponent v-if = "this.goals.length > 0" />
+    <p v-else>No hay estadísticas, ya que no metas.</p>
     <h2>Metas</h2>
     <div v-if = "this.goals.length > 0">
         <p>Estas son todas las metas establecidas por tu especialista de la salud para este plan.</p>
@@ -16,11 +18,11 @@
             </div>
         </article>
     </div>
-    <button class = "btn btn-success mt-5 mb-5" @click = "$router.push(`/planes/${this.id}/metas/registrar`)" v-if = "this.appStore.getIsMedic">Agregar meta</button>
+    <button class = "btn btn-success mt-5 mb-5 mr-4" @click = "$router.push(`/planes/${this.id}/metas/registrar`)" v-if = "this.appStore.getIsMedic">Agregar meta</button>
     <div v-if = "!this.goals.length >0">
         <p>No hay metas registradas para este plan.</p>
     </div>
-    <button class = "btn btn-danger mt-5 ml-4 mb-5" v-if = "this.appStore.getIsMedic" @click = "$router.push('/planes/medico')">Volver</button>
+    <button class = "btn btn-danger mt-5 mb-5" v-if = "this.appStore.getIsMedic" @click = "$router.push('/planes/medico')">Volver</button>
     <button v-else class = "btn btn-danger mt-5 mb-5" @click = "$router.push('/planes')">Volver</button>
     <Spinner class = "mt-5 mb-5" v-if = "this.validations.showSpinner"/>
 </template>
@@ -28,6 +30,7 @@
 import RegisterApplicationService from "../core/RegisterApplicationService.js";
 import {appStoreGeneral} from "../store/AppStore.js";
 import Spinner from "../components/General/Spinner.vue"
+import StatisticInfoComponent from "../components/PlanComponents/StatisticInfoComponent.vue";
 export default {
     data(){
         return {
@@ -40,6 +43,7 @@ export default {
         }
     },
     components: {
+        StatisticInfoComponent,
         Spinner
     },
     setup(){

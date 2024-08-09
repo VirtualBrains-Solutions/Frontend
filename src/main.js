@@ -27,7 +27,15 @@ app.use(vuetify)
 
 // load storage
 const storage = appStoreGeneral()
-storage.loadState()
+
+storage.loadState(storage.getTypeUser)
+
+// Set if the user is medic
+if(storage.getUserInfo !== null){
+    if(storage.getUserInfo.tipo_usuario === "Médico"){
+        storage.setMedicTrue()
+    }
+}
 
 let validateURLToken = window.location.href.toString().includes("change-password")
 

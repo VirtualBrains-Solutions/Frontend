@@ -15,6 +15,12 @@ import RecoverPassword from "../views/RecoverPassword.vue";
 import ChangePassword from "../views/ChangePassword.vue";
 import UpdateUserInfoView from "../views/UpdateUserInfoView.vue"
 import ChangePasswordWithoutTokenView from "../views/ChangePasswordWithoutTokenView.vue"
+import AnswersQuestionnairesView from "../views/questionnaires/AnswersQuestionnairesView.vue";
+import QuestionnaireGeneralView from "../views/questionnaires/QuestionnaireGeneralView.vue";
+import QuestionnaireInterviewAfterView from "../views/questionnaires/Interview/QuestionnaireInterviewAfterView.vue"
+import QuestionnaireInterviewBeforeView from "../views/questionnaires/Interview/QuestionnaireInterviewBeforeView.vue"
+import QuestionnaireMeetingBarBeforeView from "../views/questionnaires/MeetingBar/QuestionnaireMeetingBarBeforeView.vue"
+import QuestionnaireMeetingBarAfterView from "../views/questionnaires/MeetingBar/QuestionnaireMeetingBarAfterView.vue"
 
 
 const router = createRouter({
@@ -103,6 +109,36 @@ const router = createRouter({
       path: "/actualizar-password",
       name: "actualizar-password",
       component: ChangePasswordWithoutTokenView
+    },
+    {
+      path: "/cuestionarios/respuestas",
+      name: "cuestionarios-respuestas",
+      component: AnswersQuestionnairesView
+    },
+    {
+      path: "/cuestionarios/general",
+      name: "cuestionarios-general",
+      component: QuestionnaireGeneralView
+    },
+    {
+      path: "/cuestionarios/entrevista/antes",
+      name: "cuestionarios-entrevista-antes",
+      component: QuestionnaireInterviewBeforeView
+    },
+    {
+      path: "/cuestionarios/entrevista/despues",
+      name: "cuestionarios-entrevista-despues",
+      component: QuestionnaireInterviewAfterView
+    },
+    {
+      path: "/cuestionarios/reunionbar/antes",
+      name: "cuestionarios-reunionbar-antes",
+      component: QuestionnaireMeetingBarBeforeView
+    },
+    {
+      path: "/cuestionarios/reunionbar/despues",
+      name: "cuestionarios-reunionbar-despues",
+      component: QuestionnaireMeetingBarAfterView
     }
   ]
 })

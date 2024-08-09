@@ -14,7 +14,7 @@ import ScenarioCardComponent from "./ScenarioCardComponent.vue"
 
 export default {
     components: {
-        ScenarioCardComponent
+        ScenarioCardComponent,
     },
     props: {
         scenarios: {

@@ -1,9 +1,10 @@
 <template>
     <h1 class = "margin-top-navbar">Planes creados</h1>
-    <p>Estos son todos los planes que has creado.</p>
+    <p v-if = "this.plans.length > 0">Estos son todos los planes que has creado: </p>
+    <p v-else>No tienes planes registrados.</p>
     <div class="container-plans">
         <article v-for = "plan in this.plans" class = "mt-5">
-            <p><span>Nombre del plan:</span>{{plan.nombre_plan}}</p>
+            <p><span>Nombre del plan: </span>{{plan.nombre_plan}}</p>
             <p><span>Paciente:</span> {{plan.nombre}}</p>
             <button class = "btn btn-primary w-100" @click = "$router.push(`/planes/${plan.id[0]}`)">Ver</button>
         </article>

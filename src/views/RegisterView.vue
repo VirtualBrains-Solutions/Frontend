@@ -41,11 +41,14 @@
             >
             </v-text-field>
         </div>
-        <select id="styled-select" class = "mt-1" v-model = "this.userRegister.tipo_usuario">
-            <option value="" selected>Seleccione el tipo de usuario</option>
-            <option value="Paciente">Paciente</option>
-            <option value="Médico">Médico</option>
-        </select>
+        <div class="form-group father-element">
+            <select  class="form-contro mt-1" id="styled-select" v-model = "this.userRegister.tipo_usuario">
+                <option value="" selected>Seleccione el tipo de usuario</option>
+                <option value="Paciente">Paciente</option>
+                <option value="Médico">Médico</option>
+            </select>
+            <i class="fa-solid fa-angle-down child-element"></i>
+        </div>
         <v-file-input label="Foto de perfil" v-model = "this.userPhoto" variant = "outlined" class = "mt-3"></v-file-input>
         <button class = "btn btn-primary mt-3 btn-register" @click = "createUser" v-if = "this.validations.showButton">Enviar</button>
         <div class="container-form-question mt-3">
@@ -154,6 +157,14 @@ export default{
 
 </script>
 <style scoped>
+.father-element{
+    position: relative;
+}
+.child-element{
+    position: absolute;
+    right: 10px;
+    top: 18px;
+}
 .margin-top-navbar{
     margin-top: 70px;
 }

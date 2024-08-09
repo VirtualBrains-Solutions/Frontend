@@ -3,7 +3,7 @@
     <v-textarea class = "mt-4" label="Descripción de la meta" variant="outlined" v-model = "this.goalInfo.descripcion"></v-textarea>
     <button class = "btn btn-success" @click = "registerGoal" v-if = "this.validations.showButton">Agregar</button>
     <button class = "btn btn-danger ml-4" @click = "$router.push(`/planes/${this.planId}`)" v-if = "this.validations.showButton">Volver</button>
-    <Spinner v-if = "this.validations.showSpinner"/>
+    <Spinner v-if = "this.validations.showSpinner" class = "mb-5 mt-5"/>
 </template>
 <script>
 import Swal from "sweetalert2"

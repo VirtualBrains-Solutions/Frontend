@@ -4,7 +4,11 @@ export const appStoreGeneral = defineStore("main", {
     state:() => ({
         userInfo: null,
         logeado: false,
-        isMedic: false
+        isMedic: false,
+        countGoals: {
+            "Completado": 0,
+            "Falta": 0
+        }
     }),
     getters: {
         getUserInfo: (state) => state.userInfo,
@@ -16,6 +20,7 @@ export const appStoreGeneral = defineStore("main", {
         getUserLastName: (state) => state.userInfo.apellido,
         getURLPhoto: (state) => state.userInfo.img_url_profile,
         getPassword: (state) => state.userInfo.password,
+        getTotalCountGoals: (state) => state.countGoals
     },
     actions: {
         deleteUserInfo(){
@@ -43,6 +48,16 @@ export const appStoreGeneral = defineStore("main", {
         },
         setPassword(password){
             this.userInfo.password = password
+        },
+        setZeroCountGoals(){
+            this.countGoals.Completado = 0
+            this.countGoals.Falta = 0
+        },
+        incrementCountGoalsComplete(){
+            this.countGoals.Completado = this.countGoals.Completado + 1
+        },
+        incrementCountGoalsIncomplete(){
+            this.countGoals.Falta = this.countGoals.Falta + 1
         }
     }
 })

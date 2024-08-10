@@ -6,7 +6,7 @@
         <article v-for = "plan in this.plans" class = "mt-5">
             <p><span>Nombre del plan: </span>{{plan.nombre_plan}}</p>
             <p><span>Paciente:</span> {{plan.nombre}}</p>
-            <button class = "btn btn-primary w-100" @click = "$router.push(`/planes/${plan.id[0]}`)">Ver</button>
+            <button class = "btn btn-primary w-100" @click = "goToSpecificPlan(plan.id[0])">Ver</button>
         </article>
     </div>
     <Spinner class = "mt-5 mb-5" v-if = "this.validations.showSpinner"/>
@@ -44,6 +44,31 @@ export default{
 
        }
         this.validations.showSpinner = false
+    },
+    methods: {
+        async goToSpecificPlan(id){
+            try{
+                this.validations.showSpinner = true
+                const objService = new RegisterApplicationService()
+                const goals = await objService.getGoalsByPlanId(id)
+                this.appStore.setZeroCountGoals()
+
+                for(let i = 0; i < goals.length; i++){
+                    if(goals[i].estado_meta === "Completado"){
+                        this.appStore.incrementCountGoalsComplete()
+                    }
+                    else{
+                        this.appStore.incrementCountGoalsIncomplete()
+                    }
+                }
+
+                this.$router.push(`/planes/${id}`)
+            }
+            catch(error){
+
+            }
+
+        }
     }
 }
 

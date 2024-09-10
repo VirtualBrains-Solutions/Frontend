@@ -14,9 +14,14 @@
                             </div>
                         </div>
                     </div>
-                    <p class = "response-comment" @click = "showAnswersOrResponse(item_father.id[0])" v-if = "item_father.totalComments === 0" >Responder</p>
-                    <p class = "response-comment" @click = "showAnswersOrResponse(item_father.id[0])" v-else-if = "item_father.totalComments === 1" >Ver respuesta</p>
-                    <p class = "response-comment" @click = "showAnswersOrResponse(item_father.id[0])" v-else>Ver {{item_father.totalComments}} respuestas</p>
+                    <div v-if = "item_father.showAnswersOrResponse === false">
+                        <p class = "response-comment" @click = "showAnswersOrResponse(item_father.id[0])" v-if = "item_father.totalComments === 0" >Responder</p>
+                        <p class = "response-comment" @click = "showAnswersOrResponse(item_father.id[0])" v-else-if = "item_father.totalComments === 1" >Ver respuesta</p>
+                        <p class = "response-comment" @click = "showAnswersOrResponse(item_father.id[0])" v-else>Ver {{item_father.totalComments}} respuestas</p>
+                    </div>
+                    <div v-else>
+                        <p class = "response-comment" @click = "showAnswersOrResponse(item_father.id[0])">Ocultar</p>
+                    </div>
                     <div v-if = "item_father.showAnswersOrResponse && item_father.totalComments > 0">
                         <article v-for = "item_child in comments" class = "single-comment mt-5">
                             <div v-if = "item_father.id[0] == item_child.comentario_padre_id">
@@ -127,16 +132,27 @@ export default {
             });
         },
         showAnswersOrResponse(id){
+            // Search if the current id is opened and wants to close
+            let conditionCommentClose = false
+            for(let i = 0; i < this.comments.length; i++){
+                if(this.comments[i].id[0] === id && this.comments[i].showAnswersOrResponse){
+                    this.comments[i].showAnswersOrResponse = false
+                    conditionCommentClose = true
+                }
+            }
+
             // Close previous comments
             for(let i = 0; i < this.comments.length; i++) {
                 if (this.comments[i].showAnswersOrResponse){
                     this.comments[i].showAnswersOrResponse = false
                 }
             }
-            for(let i = 0; i < this.comments.length; i++){
-                if(parseInt(this.comments[i].id[0]) === id) {
-                    this.comments[i].showAnswersOrResponse = !this.comments[i].showAnswersOrResponse
-                    break
+            if(!conditionCommentClose){
+                for(let i = 0; i < this.comments.length; i++){
+                    if(parseInt(this.comments[i].id[0]) === id) {
+                        this.comments[i].showAnswersOrResponse = !this.comments[i].showAnswersOrResponse
+                        break
+                    }
                 }
             }
         },

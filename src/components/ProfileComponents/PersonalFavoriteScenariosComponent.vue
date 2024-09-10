@@ -14,6 +14,7 @@
 </template>
 <script>
 import RegisterApplicationService from "../../core/RegisterApplicationService.js";
+import Swal from "sweetalert2";
 export default{
     props: {
         scenarios: {
@@ -24,9 +25,27 @@ export default{
     methods:{
         async deleteFavoriteScenario(id){
             try{
-                const objService = new RegisterApplicationService()
-                await objService.deleteFavoriteScenario(id[0])
-                window.location.reload();
+                Swal.fire({
+                    title: "¿Estás seguro?",
+                    text: "Se eliminará de tu lista de escenarios favoritos.",
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Sí, Eliminar",
+                    cancelButtonText: "Cancelar"
+                }).then(async (result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: "¡Eliminado!",
+                            text: "El escenario ha sido eliminado de tu lista de escenarios favoritos.",
+                            icon: "success"
+                        });
+                        const objService = new RegisterApplicationService()
+                        await objService.deleteFavoriteScenario(id[0])
+                        window.location.reload();
+                    }
+                });
             }
             catch(error){
 

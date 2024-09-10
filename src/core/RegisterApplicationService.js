@@ -371,6 +371,57 @@ class RegisterApplicationService{
             return error
         }
     }
+
+    async createQuestionnaireGeneral(data){
+        try{
+            await http.post(`/questionnaires/general`, data)
+        }
+        catch(error){
+            console.log(error)
+            return error
+        }
+    }
+
+    async createQuestionnairePreSocial(data){
+        try{
+            await http.post(`/questionnaires/pre/social`, data)
+        }
+        catch(error){
+            console.log(error)
+            return error
+        }
+    }
+
+    async createQuestionnairePreInterview(data){
+        try{
+            await http.post(`/questionnaires/pre/interview`, data)
+        }
+        catch(error){
+            console.log(error)
+            return error
+        }
+    }
+
+    async createQuestionnairePostSocial(data){
+        try{
+            await http.post(`/questionnaires/post/social`, data)
+        }
+        catch(error){
+            console.log(error)
+            return error
+        }
+    }
+
+    async createQuestionnairePostInterview(data){
+        try{
+            await http.post(`/questionnaires/post/interview`, data)
+        }
+        catch(error){
+            console.log(error)
+            return error
+        }
+    }
 }
+
 
 export default RegisterApplicationService;

@@ -1,5 +1,6 @@
 <template>
     <h1 class = "margin-top-navbar">Respuestas de los cuestionarios</h1>
+    <p>Aquí puedes ver las respuestas de todos los cuestionarios por parte de tus pacientes.</p>
     <button class = "btn btn-primary btn-plus margin-top-cel" @click = "$router.push('/cuestionarios')">Volver</button>
 
 </template>

@@ -37,6 +37,9 @@ export default{
         return {
             appStore
         }
+    },
+    created(){
+        window.scrollTo(0, 0)
     }
 }
 

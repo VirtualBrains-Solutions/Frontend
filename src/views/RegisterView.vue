@@ -104,6 +104,14 @@ export default{
     },
     methods: {
         async createUser(){
+            if(this.userPhoto === ""){
+                Swal.fire({
+                    title: "¡Espera!",
+                    text: "Debes subir tu foto de perfil",
+                    icon: "warning"
+                });
+                return
+            }
             if(this.userRegister.nombre === "" || this.userRegister.email === "" || this.userRegister.apellido === "" || this.userRegister.password === "" || this.userRegister.tipo_usuario === ""){
                 Swal.fire({
                     title: "¡Espera!",

@@ -21,6 +21,7 @@ import QuestionnaireInterviewAfterView from "../views/questionnaires/Interview/Q
 import QuestionnaireInterviewBeforeView from "../views/questionnaires/Interview/QuestionnaireInterviewBeforeView.vue"
 import QuestionnaireMeetingBarBeforeView from "../views/questionnaires/MeetingBar/QuestionnaireMeetingBarBeforeView.vue"
 import QuestionnaireMeetingBarAfterView from "../views/questionnaires/MeetingBar/QuestionnaireMeetingBarAfterView.vue"
+import ExportInfotView from "../views/ExportInfotView.vue"
 
 
 const router = createRouter({
@@ -139,6 +140,11 @@ const router = createRouter({
       path: "/cuestionarios/reunionbar/despues",
       name: "cuestionarios-reunionbar-despues",
       component: QuestionnaireMeetingBarAfterView
+    },
+    {
+      path: "/exportar_informacion",
+      name: "exportar-informacion",
+      component: ExportInfotView
     }
   ]
 })

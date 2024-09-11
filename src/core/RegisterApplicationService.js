@@ -431,6 +431,18 @@ class RegisterApplicationService{
             return error
         }
     }
+
+    async getPatientsByMedicalId(id){
+        try{
+            const response = await http.get(`/plans/patients/medic/${id}`)
+            const {data} = response
+            return data
+        }
+        catch(error){
+            console.log(error)
+            return error
+        }
+    }
 }
 
 

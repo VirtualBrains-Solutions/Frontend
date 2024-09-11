@@ -421,6 +421,16 @@ class RegisterApplicationService{
             return error
         }
     }
+
+    async sendEmailWithData(data, id){
+        try{
+            await http.post(`/emails/send/${id}`, data)
+        }
+        catch(error){
+            console.log(error)
+            return error
+        }
+    }
 }
 
 

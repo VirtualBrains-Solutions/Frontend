@@ -8,16 +8,16 @@
     <button class = "btn btn-primary" @click = "$router.push('/cuestionarios/general')">Responder cuestionario</button>
     <hr>
     <h1>Antes de usar la aplicación de realidad virtual</h1>
-    <h3>Reunión en un bar</h3>
-    <p>Aquí nos contarás cómo te sentirías en un bar con gente que recién conoces o con gente desconocida.</p>
+    <h3>Reunión en un lugar social</h3>
+    <p>Aquí nos contarás cómo te sentirías en un lugar social con gente que recién conoces o con gente desconocida.</p>
     <button class = "btn btn-primary" @click = "$router.push('/cuestionarios/reunionbar/antes')">Responder cuestionario</button>
     <h3 class = "mt-2">Entrevista laboral</h3>
     <p>Aquí nos contarás cómo te sentirías en una entrevista laboral.</p>
     <button class = "btn btn-primary" @click = "$router.push('/cuestionarios/entrevista/antes')">Responder cuestionario</button>
     <hr>
     <h1>Después de usar la aplicación de realidad virtual</h1>
-    <h3>Reunión en un bar</h3>
-    <p>Aquí nos contarás cómo te sientes luego de sumergirte en el escenario de realidad virtual de una reunión en un bar.</p>
+    <h3>Reunión en un lugar social</h3>
+    <p>Aquí nos contarás cómo te sientes luego de sumergirte en el escenario de realidad virtual de una reunión en un lugar social.</p>
     <button class = "btn btn-primary" @click = "$router.push('/cuestionarios/reunionbar/despues')">Responder cuestionario</button>
     <h3 class = "mt-2">Entrevista laboral</h3>
     <p>Aquí nos contarás cómo te sientes luego de sumergirte en el escenario de realidad virtual de una entrevista laboral.</p>

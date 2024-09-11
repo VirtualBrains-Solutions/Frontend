@@ -12,12 +12,15 @@
         <i class="fa-solid fa-angle-down child-element"></i>
     </div>
     <v-textarea class = "mt-4" label="Deja tu comentario" variant="outlined" v-model = "this.infoSuggest.comentario_sugerencia"></v-textarea>
-    <button class = "btn btn-primary" @click = "this.createSuggest">Enviar</button>
+    <button class = "btn btn-primary" @click = "this.createSuggest" v-if = "this.validations.showButton">Enviar</button>
+    <spinner class = "mb-5" v-if = "this.validations.showSpinner"/>
 </template>
 <script>
 import Swal from "sweetalert2";
 import getCurrentDate from "../helpers/GetCurrentDate.js";
 import RegisterApplicationService from "../core/RegisterApplicationService.js";
+import {appStoreGeneral} from "../store/AppStore";
+import Spinner from "../components/General/Spinner.vue"
 
 export default{
     data(){
@@ -27,8 +30,24 @@ export default{
                 "comentario_sugerencia": "",
                 "fecha_creacion": "",
                 "usuario_id": 1
+            },
+            validations:{
+                showSpinner: false,
+                showButton: true
             }
         }
+    },
+    components:{
+        Spinner
+    },
+    setup(){
+        const appStore = appStoreGeneral()
+        return {
+            appStore
+        }
+    },
+    created() {
+        this.infoSuggest.usuario_id = this.appStore.getUserId
     },
     methods:{
         async createSuggest(){
@@ -41,6 +60,8 @@ export default{
             }
             else{
                 this.infoSuggest.fecha_creacion = getCurrentDate()
+                this.validations.showSpinner = true
+                this.validations.showButton =false
                 try{
                     const objService = new RegisterApplicationService()
                     await objService.createSuggest(this.infoSuggest)
@@ -55,6 +76,8 @@ export default{
                 catch(error){
                     console.log(error)
                 }
+                this.validations.showSpinner = false
+                this.validations.showButton = true
 
             }
 

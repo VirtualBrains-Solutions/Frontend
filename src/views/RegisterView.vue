@@ -104,6 +104,14 @@ export default{
     },
     methods: {
         async createUser(){
+            if(!this.userRegister.email.includes("@")){
+                Swal.fire({
+                    title: "¡Cuidado!",
+                    text: "Ese correo es inválido",
+                    icon: "warning"
+                });
+                return
+            }
             if(this.userPhoto === ""){
                 Swal.fire({
                     title: "¡Espera!",

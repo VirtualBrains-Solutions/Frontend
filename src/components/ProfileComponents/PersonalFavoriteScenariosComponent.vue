@@ -1,5 +1,5 @@
 <template>
-    <h2 class = "mt-4">Mapas Favoritos</h2>
+    <h2 class = "mt-4">Escenarios Favoritos</h2>
     <section class = "container-favorite-scenarios">
         <article v-for = "item in scenarios" class = "article-favorite-scenario">
             <img :src = "item.img_url" alt="" class = "scenario-img">

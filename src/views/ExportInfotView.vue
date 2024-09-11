@@ -1,6 +1,6 @@
 <template>
     <h1 class = "margin-top-navbar">Exportar datos de progreso</h1>
-    <p>Aquí debes indicar qué correo recibirá los datos de todo el progreso que has realizado.</p>
+    <p>Se enviaran todas las respuestas marcadas en los cuestionarios, y aquí debes indicar qué correo recibirá toda esa información.</p>
     <div class="form-group father-element">
         <select  class="form-control mt-1" id="styled-select" v-model = "this.infoData.type_email">
             <option value="" selected>¿Quién recibirá la información?</option>
@@ -18,13 +18,15 @@
         v-if = "this.validations.showSecondInput"
     >
     </v-text-field>
-    <Spinner v-if = "this.validations.showSpinner" />
+    <Spinner v-if = "this.validations.showSpinner" class = "mb-5" />
     <button class = "btn btn-success btn-plus mr-2" v-if = "this.validations.showButton" @click = "sendEmail">Enviar información</button>
     <button class = "btn btn-primary btn-plus margin-top-cel" v-if = "this.validations.showButton" @click = "$router.push('/perfil')">Volver</button>
 </template>
 <script>
 import Swal from "sweetalert2"
 import Spinner from "../components/General/Spinner.vue"
+import RegisterApplicationService from "../core/RegisterApplicationService.js";
+import {appStoreGeneral} from "../store/AppStore";
 
 export default{
     data(){
@@ -39,14 +41,24 @@ export default{
             },
             dataInfo: {
                 email: ""
-            }
+            },
+            userID: ""
         }
     },
     components: {
       Spinner
     },
+    setup(){
+        const appStore = appStoreGeneral()
+        return {
+            appStore
+        }
+    },
+    created(){
+        this.userID = this.appStore.getUserId
+    },
     methods: {
-        sendEmail(){
+        async sendEmail(){
             if(this.infoData.type_email.length === 0){
                 Swal.fire({
                     title: "¡Cuidado!",
@@ -55,6 +67,7 @@ export default{
                 });
                 return
             }
+
             if(this.infoData.type_email === "otro_correo" && this.dataInfo.email.length === 0){
                 Swal.fire({
                     title: "¡Cuidado!",
@@ -63,6 +76,59 @@ export default{
                 });
                 return
             }
+
+            if(this.infoData.type_email === "mi_correo"){
+                this.validations.showSpinner = true
+                this.validations.showButton = false
+                try{
+                    const data = {
+                        email: this.appStore.getUserEmail,
+                        type: "me"
+                    }
+                    const objService = new RegisterApplicationService()
+                    await objService.sendEmailWithData(data, this.userID)
+
+                    Swal.fire({
+                        title: "¡Enviado!",
+                        text: "Tu información será enviado al correo usado para crear tu cuenta.",
+                        icon: "success"
+                    });
+                    this.$router.push('/perfil')
+                }
+                catch(error){
+
+                }
+                this.validations.showSpinner = false
+                this.validations.showButton = true
+            }
+            else{
+                this.validations.showSpinner = true
+                this.validations.showButton = false
+                try{
+                    const data = {
+                        email: this.dataInfo.email,
+                        type: "another"
+                    }
+                    const objService = new RegisterApplicationService()
+                    await objService.sendEmailWithData(data, this.userID)
+
+                    Swal.fire({
+                        title: "¡Enviado!",
+                        text: "Tu información será enviado al correo usado para crear tu cuenta.",
+                        icon: "success"
+                    });
+
+                    this.$router.push('/perfil')
+                }
+                catch(error){
+
+                }
+                this.validations.showSpinner = false
+                this.validations.showButton = true
+            }
+
+
+
         }
     },
     watch: {

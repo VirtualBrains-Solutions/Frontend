@@ -14,6 +14,7 @@ export const appStoreGeneral = defineStore("main", {
         getUserInfo: (state) => state.userInfo,
         getLogeado: (state) => state.logeado,
         getUserId: (state) => state.userInfo.id,
+        getUserEmail: (state) => state.userInfo.email,
         getTypeUser: (state) => state.userInfo,
         getIsMedic: (state) => state.isMedic,
         getUserName: (state) => state.userInfo.nombre,
